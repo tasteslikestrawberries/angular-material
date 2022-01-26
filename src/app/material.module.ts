@@ -6,16 +6,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
 
 
+
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     MatButtonModule,
-    MatSliderModule
+    MatSliderModule,
+
   ],
   exports: [
     MatButtonModule,
-    MatSliderModule
+    MatSliderModule,
+
   ]
 })
 export class MaterialModule { }

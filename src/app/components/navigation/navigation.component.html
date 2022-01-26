@@ -10,6 +10,7 @@
       <a mat-list-item href="#">Link 3</a>
     </mat-nav-list>
   </mat-sidenav>
+
   <mat-sidenav-content>
     <mat-toolbar color="primary">
       <button
@@ -20,9 +21,10 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>Learn Angular Material!</span>
+      <span><a routerLink="/" routerLinkActive="active">Learn Angular Material!</a></span>
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet></router-outlet>
   </mat-sidenav-content>
+
 </mat-sidenav-container>

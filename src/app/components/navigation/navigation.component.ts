@@ -11,31 +11,19 @@ import { tap } from 'rxjs';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent {
-  isDarkTheme?: Observable<boolean>;
   isSunIcon = false;
 
   @ViewChild('drawer', {static: true}) matDrawer?: MatSidenav;
 
-  constructor(private breakpointObserver: BreakpointObserver, private themeService: ThemeService) { }
+  constructor(private themeService: ThemeService) { }
 
   toggleDarkTheme(checked: boolean) {
     this.themeService.setDarkTheme(checked);
     this.isSunIcon = !this.isSunIcon ;
   }
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
-
     closeSidebar() {
-      const isHandset= this.breakpointObserver.isMatched(
-        "(max-width: 960px)"
-      );
-      if (isHandset) {
        this.matDrawer?.close();
-     }
    }
 
 }

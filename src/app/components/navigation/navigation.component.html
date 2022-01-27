@@ -3,9 +3,6 @@
     #drawer
     class="sidenav"
     fixedInViewport
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="(isHandset$ | async) === false"
   >
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list (click)="closeSidebar()">
@@ -22,7 +19,6 @@
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async"
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
@@ -30,7 +26,7 @@
         ><a routerLink="/" routerLinkActive="active"
           >Learn Angular Material!</a
         ></span
-      ><mat-slide-toggle [checked]="isDarkTheme | async" (change)="toggleDarkTheme($event.checked)">
+      ><mat-slide-toggle (change)="toggleDarkTheme($event.checked)">
         <mat-icon *ngIf='!isSunIcon'>dark_mode</mat-icon>
         <mat-icon *ngIf='isSunIcon'>light_mode</mat-icon>
       </mat-slide-toggle>

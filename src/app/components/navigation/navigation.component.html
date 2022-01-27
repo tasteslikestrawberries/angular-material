@@ -10,8 +10,7 @@
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="/form" routerLinkActive="active">Form</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item routerLink="/list" routerLinkActive="active">List</a>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -31,13 +30,10 @@
         ><a routerLink="/" routerLinkActive="active"
           >Learn Angular Material!</a
         ></span
-      >
-      <span *ngIf="!darkMode" (click)="toggleTheme()"
-        ><mat-icon>dark_mode</mat-icon></span
-      >
-      <span *ngIf="darkMode" (click)="toggleTheme()"
-        ><mat-icon>light_mode</mat-icon></span
-      >
+      ><mat-slide-toggle [checked]="isDarkTheme | async" (change)="toggleDarkTheme($event.checked)">
+        <mat-icon *ngIf='!isSunIcon'>dark_mode</mat-icon>
+        <mat-icon *ngIf='isSunIcon'>light_mode</mat-icon>
+      </mat-slide-toggle>
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet></router-outlet>

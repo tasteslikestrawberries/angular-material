@@ -9,13 +9,9 @@ import { FormComponent } from './components/form/form.component';
 import { SassPlaygroundComponent } from './components/sass-playground/sass-playground.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MainComponent } from './components/main/main.component';
 
+import { MainComponent } from './components/main/main.component';
+import { ListComponent } from './components/list/list.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +19,8 @@ import { MainComponent } from './components/main/main.component';
     FormComponent,
     SassPlaygroundComponent,
     NavigationComponent,
-    MainComponent
+    MainComponent,
+    ListComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,12 +29,7 @@ import { MainComponent } from './components/main/main.component';
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

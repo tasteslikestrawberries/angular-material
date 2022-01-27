@@ -31,7 +31,7 @@ export class NavigationComponent {
 
     closeSidebar() {
       const isHandset= this.breakpointObserver.isMatched(
-        "(max-width: 768px)"
+        "(max-width: 960px)"
       );
       if (isHandset) {
        this.matDrawer?.close();

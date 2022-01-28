@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { ThemeService } from 'src/app/services/theme.service';
 import { MatSidenav } from '@angular/material/sidenav';
-import { tap } from 'rxjs';
+
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -15,15 +15,24 @@ export class NavigationComponent {
 
   @ViewChild('drawer', {static: true}) matDrawer?: MatSidenav;
 
-  constructor(private themeService: ThemeService) { }
+  constructor(private breakpointObserver: BreakpointObserver, private themeService: ThemeService) { }
+  
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe('(max-width: 720px)')
+  //720 is the breakpoint-on 721px the sidebar (drawer) is opened by default
+  .pipe(
+      map(result => result.matches),
+      shareReplay(1),
+  );
+
+  /*isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );*/
 
   toggleDarkTheme(checked: boolean) {
     this.themeService.setDarkTheme(checked);
     this.isSunIcon = !this.isSunIcon ;
   }
-
-    closeSidebar() {
-       this.matDrawer?.close();
-   }
 
 }

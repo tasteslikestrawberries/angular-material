@@ -9,9 +9,7 @@ import { FormComponent } from './components/form/form.component';
 import { SassPlaygroundComponent } from './components/sass-playground/sass-playground.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
-
 import { MainComponent } from './components/main/main.component';
-import { ListComponent } from './components/list/list.component';
 
 @NgModule({
   declarations: [
@@ -19,8 +17,7 @@ import { ListComponent } from './components/list/list.component';
     FormComponent,
     SassPlaygroundComponent,
     NavigationComponent,
-    MainComponent,
-    ListComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,

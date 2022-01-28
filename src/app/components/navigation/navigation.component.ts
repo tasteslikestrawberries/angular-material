@@ -30,8 +30,8 @@ export class NavigationComponent {
       shareReplay()
     );
 
-  toggleDarkTheme(checked: boolean) {
-    this.themeService.setDarkTheme(checked);
+  toggleDarkTheme(isChecked: boolean) {
+    this.themeService.setDarkTheme(isChecked);
     this.isSunIcon = !this.isSunIcon ;
   }
 

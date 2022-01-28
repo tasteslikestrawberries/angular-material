@@ -17,18 +17,18 @@ export class NavigationComponent {
 
   constructor(private breakpointObserver: BreakpointObserver, private themeService: ThemeService) { }
   
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe('(max-width: 720px)')
+  /*isHandset$: Observable<boolean> = this.breakpointObserver.observe('(max-width: 720px)')
   //720 is the breakpoint-on 721px the sidebar (drawer) is opened by default
   .pipe(
       map(result => result.matches),
       shareReplay(1),
-  );
+  );*/
 
-  /*isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset) //check official breakpoints and orientations
     .pipe(
       map(result => result.matches),
       shareReplay()
-    );*/
+    );
 
   toggleDarkTheme(checked: boolean) {
     this.themeService.setDarkTheme(checked);

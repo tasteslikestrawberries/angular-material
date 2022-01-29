@@ -9,19 +9,18 @@ import { IUser } from '../models/IUser';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent {
-  user?: IUser;
+  user!: IUser;
 
   myForm = this.fb.group({
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     phone: ['', Validators.required],
     date: [''],
-    address: ['', Validators.required],
   });
 
   get f() { return this.myForm.controls; }
 
-  constructor(private fb: FormBuilder, private userService: UserService) {}
+  constructor(private fb: FormBuilder) {}
 
   onSubmit() {
     this.user = this.myForm.value;

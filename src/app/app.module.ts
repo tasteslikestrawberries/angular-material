@@ -10,6 +10,7 @@ import { SassPlaygroundComponent } from './components/sass-playground/sass-playg
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MainComponent } from './components/main/main.component';
+import { ListComponent } from './components/list/list.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { MainComponent } from './components/main/main.component';
     FormComponent,
     SassPlaygroundComponent,
     NavigationComponent,
-    MainComponent
+    MainComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,

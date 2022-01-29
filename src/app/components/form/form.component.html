@@ -1,5 +1,5 @@
-<mat-card-title> User Form </mat-card-title>
-  <mat-card-content>
+<div class="formWrapper">
+<mat-card-title>Add User</mat-card-title>
     <form [formGroup]="myForm" (ngSubmit)="onSubmit()" novalidate>
       <!--disable native browser validation-->
       <!--https://www.positronx.io/angular-material-reactive-forms-validation-tutorial/-->
@@ -46,5 +46,5 @@
 
       <button mat-raised-button color="accent">Submit</button>
     </form>
-  </mat-card-content>
 
+</div>

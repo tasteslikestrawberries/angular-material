@@ -4,11 +4,11 @@
     class="sidenav"
     fixedInViewport
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" 
     [opened]="(isHandset$ | async) === false"
   >
     <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list (click)="drawer.toggle()"> <!--added toggle behavior on link click-->
+    <mat-nav-list (click)="drawer.mode === 'over' && drawer.close()"> 
       <a mat-list-item routerLink="/form" routerLinkActive="active">Form</a>
       <a mat-list-item routerLink="/list" routerLinkActive="active">List</a>
     </mat-nav-list>

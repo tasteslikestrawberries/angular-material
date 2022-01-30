@@ -9,7 +9,6 @@
         <mat-label>Name</mat-label>
         <input matInput placeholder="Name" formControlName="name" required />
         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        <mat-hint>Hint</mat-hint>
       </mat-form-field>
 
       <!--EMAIL-->
@@ -21,19 +20,16 @@
           formControlName="email"
           required
         />
-        <mat-error *ngIf="f.email.touched && f.email.errors"
-          >Error Message</mat-error
-        >
+        <mat-error *ngIf="f.email.touched && f.email.errors">Error Message</mat-error>
       </mat-form-field>
+
       <!--PHONE-->
       <mat-form-field appearance="outline" floatLabel="always">
         <mat-label>Phone number</mat-label>
         <input matInput placeholder='091/111-1111' formControlName="phone" required />
         <mat-icon matSuffix>phone</mat-icon>
-        <mat-hint>Include area code</mat-hint>
-        <mat-error *ngIf="f.phone.touched && f.phone.errors"
-          >Error Message</mat-error
-        >
+        <!--<mat-hint>Include area code</mat-hint>-->
+        <mat-error *ngIf="f.phone.touched && f.phone.errors">Error Message</mat-error>
       </mat-form-field>
 
       <!--DATE-->

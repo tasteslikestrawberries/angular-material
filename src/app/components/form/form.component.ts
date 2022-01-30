@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
+import { FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { IUser } from '../models/IUser';
 
@@ -9,6 +9,8 @@ import { IUser } from '../models/IUser';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent {
+  @ViewChild(FormGroupDirective) formGroupDirective!: FormGroupDirective;
+
   user!: IUser;
 
   myForm = this.fb.group({
@@ -20,10 +22,11 @@ export class FormComponent {
 
   get f() { return this.myForm.controls; }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private userService: UserService) {}
 
   onSubmit() {
     this.user = this.myForm.value;
-    this.myForm.reset()
+    this.userService.addUser(this.user)
+    this.formGroupDirective.resetForm() //resets both form and validators
   }
 }

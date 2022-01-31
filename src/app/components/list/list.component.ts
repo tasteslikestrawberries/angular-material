@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { IUser } from '../models/IUser';
 import { UserService } from 'src/app/services/user.service';
 import { catchError, mapTo, Observable, of, startWith, tap } from 'rxjs';
@@ -71,16 +71,12 @@ export class ListComponent implements OnInit {
 
     this.results = data.sort((a: any, b: any) => {
       const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'name':
-          return compare(a.name, b.name, isAsc);
-        default:
-          return 0;
-      }
+      if (sort.active) return compare(a, b, isAsc);
+      return 0;
     });
   }
 }
 
-function compare(a: number | string, b: number | string, isAsc: boolean) {
-  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+function compare(a: number | string | Date, b: number | string | Date, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1); //multiplying two numbers
 }

@@ -12,6 +12,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MainComponent } from './components/main/main.component';
 import { ListComponent } from './components/list/list.component';
 import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -18,6 +18,7 @@
       <!--to add class for elevated shadow style: class="mat-elevation-z8" -->
     <mat-toolbar color="primary">
       <button
+        class="hamburger"
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
@@ -35,7 +36,7 @@
       </mat-slide-toggle>
     </mat-toolbar>
     <!-- Add Content Here -->
-    <mat-card style="margin: 1rem" class="mat-elevation-z8">
+    <mat-card class="mat-elevation-z8">
       <router-outlet></router-outlet>
     </mat-card>
   </mat-sidenav-content>

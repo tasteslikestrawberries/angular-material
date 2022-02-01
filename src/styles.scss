@@ -20,3 +20,14 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.mat-card {
+  min-height: 90vh;
+  margin: 1rem;
+}
+
+@media (max-width: 50rem) {
+  .mat-card {
+    box-shadow: unset;
+  }
+}

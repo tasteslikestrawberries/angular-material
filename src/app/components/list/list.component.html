@@ -14,7 +14,14 @@
 
 <!--SEARCH-->
 <mat-form-field>
-  <input #searchBox type="search" matInput placeholder="Search users" (keyup.enter)="onSearch()" />
+  <input
+    #searchBox
+    type="search"
+    matInput
+    placeholder="Search users"
+    (keyup.enter)="onSearch()"
+    (input)="clearInput()"
+  />
   <button matSuffix mat-button (click)="onSearch()">
     <mat-icon>search</mat-icon>
   </button>
@@ -59,6 +66,7 @@
 </mat-table>
 
 <mat-paginator
+  #paginator
   [pageSizeOptions]="[5, 10, 20]"
   showFirstLastButtons
   aria-label="Select page"

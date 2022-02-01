@@ -17,6 +17,12 @@ export class ListComponent implements OnInit {
   isLoading$?: Observable<boolean>;
   error$?: Observable<Error | false>;
 
+  resetDataSource() {
+    this.dataSource = new MatTableDataSource(this.results);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
   //SEARCH
   input = '';
   @ViewChild('searchBox') searchBox!: ElementRef<HTMLInputElement>;
@@ -34,11 +40,18 @@ export class ListComponent implements OnInit {
     });
   }
 
+  clearInput() {
+    console.log(this.input);
+    if (this.searchBox.nativeElement.value === '') {
+      this.resetDataSource();
+    }
+  }
+
   //TABLE
   displayedColumns = ['idx', 'name', 'email', 'phone', 'date'];
 
   //PAGINATOR
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild('paginator') paginator!: MatPaginator;
   dataSource!: MatTableDataSource<IUser[]>;
   results?: any;
 
@@ -55,9 +68,7 @@ export class ListComponent implements OnInit {
     this.users$ = this.userService.getUsers().pipe(
       tap((data) => {
         this.results = data;
-        this.dataSource = new MatTableDataSource(this.results);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        this.resetDataSource();
       })
     );
 

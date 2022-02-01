@@ -1,10 +1,11 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { IUser } from '../../shared/models/IUser';
 import { UserService } from 'src/app/shared/services/user.service';
 import { catchError, mapTo, Observable, of, startWith, tap } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
+import { sort as compare } from 'src/app/utilities/helper-functions/sort';
 
 @Component({
   selector: 'app-list',
@@ -15,6 +16,23 @@ export class ListComponent implements OnInit {
   users$!: Observable<IUser[]>;
   isLoading$?: Observable<boolean>;
   error$?: Observable<Error | false>;
+
+  //SEARCH
+  input = '';
+  @ViewChild('searchBox') searchBox!: ElementRef<HTMLInputElement>;
+
+  onSearch() {
+    this.input = this.searchBox.nativeElement.value;
+    if (!this.results) return;
+
+    this.dataSource = this.results.filter((result: IUser) => {
+      if (result.name.toLowerCase().includes(this.input.toLowerCase()))
+        return true;
+      if (result.email.toLowerCase().includes(this.input.toLowerCase()))
+        return true;
+      return false;
+    });
+  }
 
   //TABLE
   displayedColumns = ['idx', 'name', 'email', 'phone', 'date'];
@@ -75,8 +93,4 @@ export class ListComponent implements OnInit {
       return 0;
     });
   }
-}
-
-function compare(a: number | string | Date, b: number | string | Date, isAsc: boolean) {
-  return (a < b ? -1 : 1) * (isAsc ? 1 : -1); //multiplying two numbers
 }

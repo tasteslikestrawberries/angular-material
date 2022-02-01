@@ -27,7 +27,10 @@ export class SearchComponent implements OnInit {
     if (!this.users) return;
 
     this.searchResults = this.users.filter((user) => {
-      if (user.name.toLowerCase().includes(this.input)) return true;
+      if (user.name.toLowerCase().includes(this.input.toLowerCase()))
+        return true;
+      if (user.email.toLowerCase().includes(this.input.toLowerCase()))
+        return true;
       return false;
     });
   }

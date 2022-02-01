@@ -12,8 +12,15 @@
   <li *ngFor="let user of users$ | async">{{ user.name }}</li>
 </ul>-->
 
-<app-search></app-search>
+<!--SEARCH-->
+<mat-form-field>
+  <input #searchBox type="search" matInput placeholder="Search users" (keyup.enter)="onSearch()" />
+  <button matSuffix mat-button (click)="onSearch()">
+    <mat-icon>search</mat-icon>
+  </button>
+</mat-form-field>
 
+<!--TABLE-->
 <mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
   <!-- Idx Column -->
   <ng-container matColumnDef="idx">

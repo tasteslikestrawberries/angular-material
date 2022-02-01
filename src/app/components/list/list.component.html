@@ -12,6 +12,8 @@
   <li *ngFor="let user of users$ | async">{{ user.name }}</li>
 </ul>-->
 
+<app-search></app-search>
+
 <mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
   <!-- Idx Column -->
   <ng-container matColumnDef="idx">

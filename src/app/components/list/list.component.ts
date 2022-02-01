@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { IUser } from '../models/IUser';
-import { UserService } from 'src/app/services/user.service';
+import { IUser } from '../../shared/models/IUser';
+import { UserService } from 'src/app/shared/services/user.service';
 import { catchError, mapTo, Observable, of, startWith, tap } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';

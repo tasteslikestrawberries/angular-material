@@ -6,21 +6,21 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormComponent } from './components/form/form.component';
-import { SassPlaygroundComponent } from './components/sass-playground/sass-playground.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MainComponent } from './components/main/main.component';
 import { ListComponent } from './components/list/list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormComponent,
-    SassPlaygroundComponent,
     NavigationComponent,
     MainComponent,
     ListComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

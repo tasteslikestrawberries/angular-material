@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
-import { UserService } from 'src/app/services/user.service';
-import { IUser } from '../models/IUser';
+import { UserService } from 'src/app/shared/services/user.service';
+import { IUser } from '../../shared/models/IUser';
 
 @Component({
   selector: 'app-form',

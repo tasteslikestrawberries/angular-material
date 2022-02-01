@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { ThemeService } from 'src/app/services/theme.service';
+import { ThemeService } from 'src/app/shared/services/theme.service';
 import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({

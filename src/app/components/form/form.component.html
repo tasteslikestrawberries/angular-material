@@ -65,7 +65,11 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-    <button mat-raised-button color="accent" [disabled]="!myForm.valid">
+    <button
+      mat-raised-button
+      color="accent"
+      [disabled]="myForm.touched && !myForm.valid"
+    >
       Submit
     </button>
   </form>

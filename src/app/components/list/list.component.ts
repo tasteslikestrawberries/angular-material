@@ -17,36 +17,6 @@ export class ListComponent implements OnInit {
   isLoading$?: Observable<boolean>;
   error$?: Observable<Error | false>;
 
-  resetDataSource() {
-    this.dataSource = new MatTableDataSource(this.results);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
-  //SEARCH
-  input = '';
-  @ViewChild('searchBox') searchBox!: ElementRef<HTMLInputElement>;
-
-  onSearch() {
-    this.input = this.searchBox.nativeElement.value;
-    if (!this.results) return;
-
-    this.dataSource = this.results.filter((result: IUser) => {
-      if (result.name.toLowerCase().includes(this.input.toLowerCase()))
-        return true;
-      if (result.email.toLowerCase().includes(this.input.toLowerCase()))
-        return true;
-      return false;
-    });
-  }
-
-  clearInput() {
-    console.log(this.input);
-    if (this.searchBox.nativeElement.value === '') {
-      this.resetDataSource();
-    }
-  }
-
   //TABLE
   displayedColumns = ['idx', 'name', 'email', 'phone', 'date'];
 
@@ -55,6 +25,10 @@ export class ListComponent implements OnInit {
   dataSource!: MatTableDataSource<IUser[]>;
   results?: any;
 
+  //SEARCH
+  input = '';
+  @ViewChild('searchBox') searchBox!: ElementRef<HTMLInputElement>;
+
   //MAT SORT
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -62,6 +36,12 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchUsers();
+  }
+
+  resetDataSource() {
+    this.dataSource = new MatTableDataSource(this.results);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   fetchUsers() {
@@ -89,6 +69,26 @@ export class ListComponent implements OnInit {
       mapTo(false),
       catchError((err) => of(err))
     );
+  }
+
+  onSearch() {
+    this.input = this.searchBox.nativeElement.value;
+    if (!this.results) return;
+
+    this.dataSource = this.results.filter((result: IUser) => {
+      if (result.name.toLowerCase().includes(this.input.toLowerCase()))
+        return true;
+      if (result.email.toLowerCase().includes(this.input.toLowerCase()))
+        return true;
+      return false;
+    });
+  }
+
+  onClearInput() {
+    console.log(this.input);
+    if (this.searchBox.nativeElement.value === '') {
+      this.resetDataSource();
+    }
   }
 
   sortData(sort: Sort) {

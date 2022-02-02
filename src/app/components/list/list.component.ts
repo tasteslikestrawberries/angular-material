@@ -18,7 +18,7 @@ export class ListComponent implements OnInit {
   error$?: Observable<Error | false>;
 
   //TABLE
-  displayedColumns = ['idx', 'name', 'email', 'phone', 'date'];
+  displayedColumns = ['idx', 'name', 'email', 'phone', 'date', 'delete'];
 
   //PAGINATOR
   @ViewChild('paginator') paginator!: MatPaginator;
@@ -69,6 +69,12 @@ export class ListComponent implements OnInit {
       mapTo(false),
       catchError((err) => of(err))
     );
+  }
+
+  deleteUser(id: string) {
+    this.userService.deleteUser(id);
+    this.results = this.results.filter((result: IUser) => result.id !== id);
+    this.resetDataSource();
   }
 
   onSearch() {

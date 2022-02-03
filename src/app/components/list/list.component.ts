@@ -55,9 +55,9 @@ export class ListComponent implements OnInit {
     /*startWith returns an observable that, at the moment of subscription, will synchronously emit
      all values provided to this operator, then subscribe to the source and mirror all of its emissions to subscribers.*/
 
-    /*mapTo transforms that first, startWith's true value to false (spinner appears, then disappears
-      when the other stream values start emitting) and for all the emitted values, stays false. In case of an error, the returned
-      value is false (so the spinner is gone).
+    /*mapTo transforms stream values, so in this case it must be put before startWith, because, if put first,
+     it would transform its value to false (the spinner wouldn't show on start). 
+     The startWith value always emits first, then the (users$) stream begins and mapTo will map the spinner to false.
       )*/
     this.isLoading$ = this.users$.pipe(
       mapTo(false),

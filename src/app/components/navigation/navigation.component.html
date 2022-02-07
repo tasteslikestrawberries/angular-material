@@ -15,7 +15,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-      <!--to add class for elevated shadow style: class="mat-elevation-z8" -->
+    <!--to add class for elevated shadow style: class="mat-elevation-z8" -->
     <mat-toolbar color="primary">
       <button
         class="hamburger"
@@ -26,10 +26,15 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span
-        ><a routerLink="/" routerLinkActive="active"
-          >Learn Angular Material!</a
-        ></span
+      <span>
+        <div class="wrapper">
+          <div class="div1"></div>
+          <div class="div2"></div>
+
+          <a routerLink="/" routerLinkActive="active"
+            >Learn Angular Material!</a
+          >
+        </div></span
       ><mat-slide-toggle (change)="toggleDarkTheme($event.checked)">
         <mat-icon *ngIf="!isSunIcon">dark_mode</mat-icon>
         <mat-icon *ngIf="isSunIcon">light_mode</mat-icon>

@@ -1,0 +1,35 @@
+//map
+$font-weights: (
+  regular: 400,
+  bold: 700,
+  light: 200,
+);
+
+//variable
+$border: 5px dotted rgb(27, 156, 189);
+
+.wrapper {
+  display: flex;
+  gap: 2rem;
+  align-items:center;
+}
+
+button {
+  background-color: rgb(10, 234, 250);
+}
+.first {
+  width: 10rem;
+  height: 10rem;
+  background-color: rgb(247, 85, 212);
+  text-align: center;
+  font-weight: map-get($map: $font-weights, $key: bold);
+  border: $border;
+}
+
+.second {
+  @extend .first;
+  border: unset;
+  @at-root .button {
+    background-color: red;
+  }
+}

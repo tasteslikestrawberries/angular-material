@@ -22,12 +22,12 @@ button {
   height: 10rem;
   background-color: rgb(247, 85, 212);
   text-align: center;
-  font-weight: map-get($map: $font-weights, $key: bold);
+  font-weight: map-get($map: $font-weights, $key: bold); //using map
   border: $border;
 }
 
 .second {
-  @extend .first;
+  @extend .first; //extend showcase, but better use @mixin instead
   border: unset;
   @at-root .button {
     background-color: red;

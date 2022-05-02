@@ -52,8 +52,13 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
   //SEARCH
   @ViewChild('searchBox', { static: false })
   searchBox!: ElementRef<HTMLInputElement>;
-
   destroy$ = new Subject();
+
+  constructor(private userService: UserService) {}
+
+  ngOnInit(): void {
+    this.fetchUsers();
+  }
 
   ngAfterViewInit() {
     const inputObs$ = fromEvent(this.searchBox.nativeElement, 'input').pipe(
@@ -77,12 +82,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
         return false;
       });
     });
-  }
-
-  constructor(private userService: UserService) {}
-
-  ngOnInit(): void {
-    this.fetchUsers();
   }
 
   resetDataSource() {
@@ -124,10 +123,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.resetDataSource();
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next(null);
-  }
-
   sortData(sort: Sort) {
     const data = this.results.slice();
     if (!sort.active || sort.direction === '') {
@@ -140,5 +135,9 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
       if (sort.active) return compare(a, b, isAsc);
       return 0;
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(null);
   }
 }

@@ -9,10 +9,14 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   isDarkTheme?: Observable<boolean>;
+  title = 'angular-material';
 
   constructor(private themeService: ThemeService) {}
 
   ngOnInit() {
     this.isDarkTheme = this.themeService.isDarkTheme;
   }
+
+  //just for testing purposes
+  addNumbers = (a:number,b:number) => a + b;
 }

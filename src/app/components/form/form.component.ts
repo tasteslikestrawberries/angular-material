@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { UserService } from 'src/app/shared/services/user.service';
 import { IUser } from '../../shared/models/IUser';
+import { ageValidator } from 'src/app/shared/custom-validators/custom-validators';
 
 @Component({
   selector: 'app-form',
@@ -18,6 +19,7 @@ export class FormComponent {
     email: ['', [Validators.required, Validators.email]],
     phone: ['', Validators.required],
     date: [''],
+    age: ['', ageValidator],
   });
 
   get f() { return this.myForm.controls; }

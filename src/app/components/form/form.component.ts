@@ -22,7 +22,7 @@ export class FormComponent {
     age: ['', ageValidator],
   });
 
-  get f() { return this.myForm.controls; }
+  get f() { return this.myForm.controls; } //for validators to access form values
 
   constructor(private fb: FormBuilder, private userService: UserService) {}
 

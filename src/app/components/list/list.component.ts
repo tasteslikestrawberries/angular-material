@@ -1,7 +1,28 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+  OnDestroy,
+} from '@angular/core';
 import { IUser } from '../../shared/models/IUser';
 import { UserService } from 'src/app/shared/services/user.service';
-import { catchError, mapTo, Observable, of, startWith, tap } from 'rxjs';
+import {
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  fromEvent,
+  map,
+  mapTo,
+  Observable,
+  of,
+  startWith,
+  Subject,
+  Subscription,
+  takeUntil,
+  tap,
+} from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -12,7 +33,7 @@ import { sort as compare } from 'src/app/utilities/helper-functions/sort';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
   users$!: Observable<IUser[]>;
   isLoading$?: Observable<boolean>;
   error$?: Observable<Error | false>;
@@ -25,17 +46,42 @@ export class ListComponent implements OnInit {
   dataSource!: MatTableDataSource<IUser[]>;
   results?: any;
 
-  //SEARCH
-  input = '';
-  @ViewChild('searchBox') searchBox!: ElementRef<HTMLInputElement>;
-
   //MAT SORT
   @ViewChild(MatSort) sort!: MatSort;
+
+  //SEARCH
+  @ViewChild('searchBox', { static: false })
+  searchBox!: ElementRef<HTMLInputElement>;
+  destroy$ = new Subject();
 
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
     this.fetchUsers();
+  }
+
+  ngAfterViewInit() {
+    const inputObs$ = fromEvent(this.searchBox.nativeElement, 'input').pipe(
+      map(() => this.searchBox.nativeElement.value),
+      debounceTime(1000),
+      distinctUntilChanged(),
+      takeUntil(this.destroy$)
+    );
+
+    const inputSubscription = inputObs$.subscribe((input) => {
+      if (!this.results) return;
+      if (input === '') {
+        this.resetDataSource();
+        return;
+      }
+      this.dataSource = this.results.filter((result: IUser) => {
+        if (result.name.toLowerCase().includes(input.toLowerCase()))
+          return true;
+        if (result.email.toLowerCase().includes(input.toLowerCase()))
+          return true;
+        return false;
+      });
+    });
   }
 
   resetDataSource() {
@@ -77,26 +123,6 @@ export class ListComponent implements OnInit {
     this.resetDataSource();
   }
 
-  onSearch() {
-    this.input = this.searchBox.nativeElement.value;
-    if (!this.results) return;
-
-    this.dataSource = this.results.filter((result: IUser) => {
-      if (result.name.toLowerCase().includes(this.input.toLowerCase()))
-        return true;
-      if (result.email.toLowerCase().includes(this.input.toLowerCase()))
-        return true;
-      return false;
-    });
-  }
-
-  onClearInput() {
-    console.log(this.input);
-    if (this.searchBox.nativeElement.value === '') {
-      this.resetDataSource();
-    }
-  }
-
   sortData(sort: Sort) {
     const data = this.results.slice();
     if (!sort.active || sort.direction === '') {
@@ -109,5 +135,9 @@ export class ListComponent implements OnInit {
       if (sort.active) return compare(a, b, isAsc);
       return 0;
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(null);
   }
 }

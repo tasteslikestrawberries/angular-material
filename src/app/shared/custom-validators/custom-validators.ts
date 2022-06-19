@@ -1,4 +1,6 @@
-import { ValidationErrors, ValidatorFn, AbstractControl } from '@angular/forms';
+import { ValidationErrors, ValidatorFn, AbstractControl, AsyncValidatorFn } from '@angular/forms';
+import { Observable, map } from 'rxjs';
+import { UserService } from '../services/user.service';
 
 //the need to call the function in the validators array depends on the function implementation
 
@@ -20,5 +22,15 @@ export const ageValidator: ValidationErrors | null = (
 
 //ASYNC VALIDATORS
 
-
+/*export const createValidator = (apiService: UserService): AsyncValidatorFn => {
+    return (control: AbstractControl): Observable<ValidationErrors> => {
+      return apiService
+        .checkIfUsernameExists(control.value)
+        .pipe(
+          map((result: boolean) =>
+            result ? { usernameAlreadyExists: true } : null
+          )
+        );
+    };
+}*/
 

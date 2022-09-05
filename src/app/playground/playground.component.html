@@ -1,7 +1,19 @@
 <ng-container *ngIf="$activity | async as activity; else loading">
+  <h3>Activity:</h3>
   <p>{{ activity.activity }}</p>
   <p>{{ activity.type }}</p>
 </ng-container>
+
+<ng-container *ngIf="$user | async as user; else loading">
+  <h3>User:</h3>
+  <p>{{ user.name.first }} {{' '}} {{ user.location.city }}</p>
+</ng-container>
+
 <ng-template #loading>
   <p>Loading...</p>
 </ng-template>
+
+<ng-template *ngIf="$error | async">
+  <p>Sorry, an error occurred</p>
+</ng-template>
+

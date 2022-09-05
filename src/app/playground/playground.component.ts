@@ -1,6 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import {
+  catchError,
+  map,
+  mapTo,
+  Observable,
+  of,
+  Subject,
+  switchMap,
+  tap,
+  throwError,
+} from 'rxjs';
 
 interface IActivity {
   activity: string;
@@ -14,22 +24,31 @@ interface IActivity {
   styleUrls: ['./playground.component.scss'],
 })
 export class PlaygroundComponent implements OnInit {
-  /*url = 'https://randomuser.me/api';
-  user: any;
-  user$!: Observable<any>;
-  loading = null;*/
-
   $activity!: Observable<IActivity>;
-  url = 'https://www.boredapi.com/api/activity'
+  url = 'https://www.boredapi.com/api/activity';
 
-  constructor(private http: HttpClient) { }
+  url2 = 'https://randomuser.me/api';
+  $user!: Observable<any>;
+
+  $error!: Observable<boolean>;
+
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.loadActivity();
+    this.loadUser();
   }
-
 
   loadActivity() {
     this.$activity = this.http.get<IActivity>(this.url);
+    this.$error  = this.$activity.pipe(catchError((err) => of(true)), mapTo(false));
+
+  }
+
+  loadUser() {
+    this.$user = this.http.get(this.url2).pipe(
+      //tap((data) => console.log(data)),
+      map((data: any) => data.results[0])
+    );
   }
 }

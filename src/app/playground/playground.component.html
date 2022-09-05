@@ -1,0 +1,7 @@
+<ng-container *ngIf="($activity | async) as activity; else loading">
+   <p>{{ activity.activity }}</p>
+   <p>{{ activity.type }}</p>
+</ng-container>
+<ng-template #loading>
+  <p>Loading...</p>
+</ng-template>

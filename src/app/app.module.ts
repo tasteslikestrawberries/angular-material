@@ -11,6 +11,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MainComponent } from './components/main/main.component';
 import { ListComponent } from './components/list/list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PlaygroundComponent } from './playground/playground.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     NavigationComponent,
     MainComponent,
     ListComponent,
+    PlaygroundComponent,
   ],
   imports: [
     BrowserModule,

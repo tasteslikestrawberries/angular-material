@@ -68,6 +68,21 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
+    <!--AGE (custom validator test)-->
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Age</mat-label>
+      <input matInput placeholder="Age" formControlName="age" />
+      <mat-icon *ngIf="f.age.valid" matSuffix
+        >sentiment_very_satisfied</mat-icon
+      >
+      <mat-icon *ngIf="f.age.touched && f.age.errors" matSuffix
+        >sentiment_dissatisfied</mat-icon
+      >
+      <mat-error *ngIf="f.age.touched && f.age.errors"
+        >Must be at least 18 years old.</mat-error
+      >
+    </mat-form-field>
+
     <button
       mat-raised-button
       color="accent"

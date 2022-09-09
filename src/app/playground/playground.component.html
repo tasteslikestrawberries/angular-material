@@ -1,19 +1,27 @@
-<ng-container *ngIf="$activity | async as activity; else loading">
-  <h3>Activity:</h3>
-  <p>{{ activity.activity }}</p>
-  <p>{{ activity.type }}</p>
+<!--activity-->
+<ng-container
+  *ngIf="activity$ | async as activity; else loadingOrErrorActivity"
+>
+  <p class="activity">{{ activity.type }}</p>
 </ng-container>
 
-<ng-container *ngIf="$user | async as user; else loading">
-  <h3>User:</h3>
-  <p>{{ user.name.first }} {{' '}} {{ user.location.city }}</p>
+<ng-template #loadingOrErrorActivity>
+  <ng-container *ngIf="error$ | async; else loading">
+    <p class="errMessage">Error loading data.</p>
+  </ng-container>
+
+  <ng-template #loading> Loading ... </ng-template>
+</ng-template>
+
+<!-- user-->
+<ng-template #loadingOrErrorUser>
+  <ng-container *ngIf="error2$ | async; else loading">
+    <p class="errMessage">Error loading data.</p>
+  </ng-container>
+
+  <ng-template #loading> Loading ... </ng-template>
+</ng-template>
+
+<ng-container *ngIf="user$ | async as user; else loadingOrErrorUser">
+  <p class="user">{{ user.name.first }} {{ " " }} {{ user.location.city }}</p>
 </ng-container>
-
-<ng-template #loading>
-  <p>Loading...</p>
-</ng-template>
-
-<ng-template *ngIf="$error | async">
-  <p>Sorry, an error occurred</p>
-</ng-template>
-

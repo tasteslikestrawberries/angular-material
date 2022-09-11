@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Logger } from '../custom-decorators/Logger';
 import {
   catchError,
   EMPTY,
@@ -18,6 +19,7 @@ interface IActivity {
   link: string;
 }
 
+
 @Component({
   selector: 'app-playground',
   templateUrl: './playground.component.html',
@@ -34,11 +36,11 @@ export class PlaygroundComponent implements OnInit {
   url2 = 'https://randomuser.me/api';
   error2$!: Observable<boolean>;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.loadActivity();
-    this.loadUser();
+    //this.loadUser();
   }
 
   loadActivity() {
@@ -70,7 +72,7 @@ export class PlaygroundComponent implements OnInit {
     return EMPTY //replaces the error obs with new replacement empty obs that completes
   }*/
 
-
+  @Logger()
   loadUser() {
     this.user$ = this.http
       .get(this.url2)

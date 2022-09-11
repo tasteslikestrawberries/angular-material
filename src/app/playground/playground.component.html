@@ -25,3 +25,6 @@
 <ng-container *ngIf="user$ | async as user; else loadingOrErrorUser">
   <p class="user">{{ user.name.first }} {{ " " }} {{ user.location.city }}</p>
 </ng-container>
+
+<!--LOG BUTTON-->
+<button type="button" (click)="loadUser()">LOG TEST</button>

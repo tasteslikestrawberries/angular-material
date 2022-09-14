@@ -27,4 +27,18 @@
 </ng-container>
 
 <!--LOG BUTTON-->
-<button type="button" (click)="loadUser()">LOG TEST</button>
+<p>
+  <button type="button" (click)="onBtnClick(count)">LOG TEST</button>
+</p>
+
+<!--TEST OPERATORS BUTTON-->
+<p>
+  <button #myButton type="button" (click)="testOperators($event)">
+    TEST OPERATORS
+  </button>
+</p>
+
+<!--TEST INPUT-->
+<p>
+  <input #myInput type="text" (input)="testInput($event)" />
+</p>

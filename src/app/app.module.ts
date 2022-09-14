@@ -12,6 +12,8 @@ import { MainComponent } from './components/main/main.component';
 import { ListComponent } from './components/list/list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PlaygroundComponent } from './playground/playground.component';
+import { ParentComponent } from './components/playground/parent/parent.component';
+import { ChildComponent } from './components/playground/child/child.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { PlaygroundComponent } from './playground/playground.component';
     MainComponent,
     ListComponent,
     PlaygroundComponent,
+    ParentComponent,
+    ChildComponent,
   ],
   imports: [
     BrowserModule,
